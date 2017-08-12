@@ -6,6 +6,7 @@ import { employeeUpdate } from '../actions';
 
 class EmployeeForm extends Component {
     render() {
+        const { name, phone, shift, employeeUpdate } = this.props;
         return (
             <View>
             <CardSection>
@@ -41,7 +42,7 @@ class EmployeeForm extends Component {
 }
 
 const mapStateToProps = (state) => {
-    const { name, phone, shift } = state.employees;
+    const { name, phone, shift } = state.employeeForm;
 
     return { name, shift, phone };
 }
