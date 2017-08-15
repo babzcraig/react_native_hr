@@ -47,3 +47,16 @@ export const employeeEdit = ({ name, phone, shift, uid }) => {
             });
     };
 };
+
+export const employeeDelete = ({ uid }) => {
+    const { currentUser } = firebase.auth();
+    console.log('deleted', uid);
+    return () => {
+        firebase.database().ref(`/users/${currentUser.uid}/employees/${uid}`)
+            .remove()
+            .then((res)=> {
+                console.log('deleted: ', res);
+                Actions.employeeList({ type: 'reset' });
+            });
+    };
+};
