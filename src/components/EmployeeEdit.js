@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Card, CardSection, MyButton} from './common';
 import EmployeeForm from './EmployeeForm';
 import { Text } from 'react-native';
-import { employeeUpdate } from '../actions';
+import { employeeUpdate, employeeEdit } from '../actions';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
@@ -15,7 +15,7 @@ class EmployeeEdit extends Component {
 
     onButtonPress = () => {
         const { name, shift, phone } = this.props;
-        console.log(name, shift, phone);
+        this.props.employeeEdit({ name, shift, phone, uid: this.props.employee.uid });
     }
 
     render() {
@@ -33,9 +33,7 @@ class EmployeeEdit extends Component {
 };
 
 mapStateToProps = ({employeeForm}) => {
-    // return { ...employeeForm }
-    const { phone, name, shift } = employeeForm;
-    return { phone, name, shift };
+    return { ...employeeForm };
 }
 
-export default connect(mapStateToProps, { employeeUpdate })(EmployeeEdit);
+export default connect(mapStateToProps, { employeeEdit, employeeUpdate })(EmployeeEdit);

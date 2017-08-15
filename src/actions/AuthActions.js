@@ -36,14 +36,15 @@ firebase.auth().signInWithEmailAndPassword(email, password)
       loginUserSuccess(dispatch, user);
     })
     .catch(error => {
-      loginUserFailed(dispatch);
+      console.log('first err: ', error);
+      loginUserFailed(dispatch, error);
     })
 });
 };
 };
 
-const loginUserFailed = (dispatch) => {
-dispatch({ type: LOGIN_USER_FAILED });
+const loginUserFailed = (dispatch, error) => {
+dispatch({ type: LOGIN_USER_FAILED, payload: error.message });
 }
 
 const loginUserSuccess = (dispatch, user) => {
